@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Character{
+- character: char
+- characterProperty: CharacterProperties
+
++ Character(in character: char, in characterProperty: CharacterProperties)
++ setCharacter(in character: char): void
++ setCharacterProperty(in characterProperty: CharacterProperties): void
++ getCharacter(): char
++ getFont(): String
++ getColor(): String
++ getSize(): int
+}
+
+
+class CharacterProperties{
+- font: String {final}
+- color: String {final}
+- size: int {final}
+
++ CharacterProperties(in font: String, in color: String, in size: int)
++ getFont(): String
++ getColor(): String
++ getSize(): int
+}
+
+
+class CharacterPropertiesFactory{
+- flyweights: Map<String, CharacterProperties> = new HashMap<> {final}
+
++ setAndRetrieveFlyweightCharacterProperties(in font: String, in color:String, in size: int)
++ sizeOfMap(): int
+}
+
+
+
+class Document {
+- characters: List<Character> = new ArrayList<> {final}
+- propertiesFactory: CharacterPropertiesFactory = new CharacterPropertiesFactory {final}
+
++ addCharacter(in c: char, in font: String, in color: String, in size: int): void
++ editCharacterProperties(in index: int, in font: String, in color: String, in size: int): void
++ saveToFile(in filename: String): void {throws IOException}
++ loadFromFile(in filename: String): void {throws IOException}
+}
+
+
+Character"*" o-- "1" CharacterProperties: each Character contains one
+CharacterPropertiesFactory"1" *-- "*"CharacterProperties: factory creates all
+
+Document *-- Character
+Document *-- CharacterPropertiesFactory
+
+note as n1
+    I was not able to get the
+    CharacterPropertiesFactory to appear as
+    an active class, so I am denoting this
+    as a note in the UML
+end note
+
+n1 --> CharacterPropertiesFactory
+
+
+class Driver {
++ {static} main(in args: String[*]) : void
+}
+
+@enduml
