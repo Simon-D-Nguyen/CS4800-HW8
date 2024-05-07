@@ -6,6 +6,7 @@ public class VendingMachine {
     private SnackDispenseHandler snackHandler;
     private Map<String, Snack> snacks;
     private Snack selectedSnack;
+    private double balance;
 
 
     public VendingMachine(){
@@ -13,6 +14,7 @@ public class VendingMachine {
         this.snacks = new HashMap<>();
         this.snackHandler = new SnackDispenser(null, null);
         this.selectedSnack = null;
+        balance = 0.0;
     }
 
 
@@ -37,6 +39,22 @@ public class VendingMachine {
     }
 
 
+    public SnackDispenseHandler getSnackHandler() {
+        return snackHandler;
+    }
+
+
+    public double getBalance() {
+        return balance;
+    }
+
+
+    public double subtractBalance(double cost) {
+        balance = balance - cost;
+        return balance;
+    }
+
+
     public void selectSnack(String name){
         if (snacks.containsKey(name))
         {
@@ -56,17 +74,13 @@ public class VendingMachine {
             return amount;
         }
         else {
+            balance = amount;
             System.out.println("Amount entered: $" + amount);
+            System.out.println("Current Balance: $" + balance);
             this.getState().dispensingSnack(this);
 
-            return 10.0;
+            System.out.println("---> Returned: $" + balance);
+            return balance;
         }
     }
-
-
-    public Snack dispenseSnack() {
-        getState().idle(this);
-        return snackHandler.handleRequest(selectedSnack.getName());
-    }
-
 }
