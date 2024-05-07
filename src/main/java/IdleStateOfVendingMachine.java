@@ -2,7 +2,7 @@ public class IdleStateOfVendingMachine implements StateOfVendingMachine {
 
     @Override
     public void idle(VendingMachine vendingMachine) {
-
+        System.out.println("No snack found!");
     }
 
     @Override
@@ -12,8 +12,9 @@ public class IdleStateOfVendingMachine implements StateOfVendingMachine {
         System.out.println("Price: $" + snack.getPrice());
     }
 
+
     @Override
     public void dispensingSnack(VendingMachine vendingMachine) {
-        System.out.println("Cannot dispense snack if not chosen");
+        System.out.println("Cannot dispense snack if not chosen.");
     }
 }
