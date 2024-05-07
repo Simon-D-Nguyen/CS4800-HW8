@@ -1,0 +1,363 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+left to right direction
+
+
+
+object "<u>testDocument: Document</u>" as doc {
+characters = new ArrayList<Character>
+propertiesFactory = new CharacterPropertiesFactory
+}
+
+
+object "<u>: CharacterProperties </u>" as arial16black{
+font = "Arial"
+color = "Black"
+size = 16
+}
+
+object "<u>: CharacterProperties </u>" as arial14black{
+font = "Arial"
+color = "Black"
+size = 14
+}
+
+object "<u>: CharacterProperties </u>" as verdana18blue{
+font = "Verdana"
+color = "Blue"
+size = 18
+}
+object "<u>: CharacterProperties </u>" as verdana12red{
+font = "Verdana"
+color = "Red"
+size = 12
+}
+
+
+
+
+map "<u>flyweights: HashMap<CharacterProperties></u>" as PropertiesMap {
+"Arial16Black" *-> arial16black
+"Arial14Black" *-> arial14black
+"Verdana18Blue" *-> verdana18blue
+"Verdana12Red" *-> verdana12red
+
+}
+
+object "<u>propertiesFactory: CharacterPropertiesFactory</u>" as docPropFactory {
+flyweights = new HashMap<CharacterProperties>
+}
+
+docPropFactory *-- PropertiesMap
+doc *-- docPropFactory
+
+
+
+object "<u>characters[0]: Character </u>" as c0{
+character = 'H'
+}
+c0 o-- arial16black
+
+object "<u>characters[1]: Character </u>" as c1{
+character = 'e'
+}
+c1 o-- arial14black
+
+
+object "<u>characters[2]: Character </u>" as c2{
+character = 'l'
+}
+c2 o-- arial14black
+
+
+object "<u>characters[3]: Character </u>" as c3{
+character = 'l'
+}
+c3 o-- arial14black
+
+
+object "<u>characters[4]: Character </u>" as c4{
+character = 'o'
+}
+c4 o-- arial14black
+
+
+object "<u>characters[5]: Character </u>" as c5{
+character = 'W'
+}
+c5 o-- arial16black
+
+
+object "<u>characters[6]: Character </u>" as c6{
+character = 'o'
+}
+c6 o-- arial14black
+
+
+object "<u>characters[7]: Character </u>" as c7{
+character = 'r'
+}
+c7 o-- arial14black
+
+
+object "<u>characters[8]: Character </u>" as c8{
+character = 'l'
+}
+c8 o-- arial14black
+
+
+object "<u>characters[9]: Character </u>" as c9{
+character = 'd'
+}
+c9 o-- arial14black
+
+
+object "<u>characters[10]: Character </u>" as c10{
+character = 'C'
+}
+c10 o-- verdana18blue
+
+
+object "<u>characters[11]: Character </u>" as c11{
+character = 'S'
+}
+c11 o-- verdana18blue
+
+
+
+object "<u>characters[12]: Character </u>" as c12{
+character = '5'
+}
+c12 o-- verdana12red
+
+object "<u>characters[13]: Character </u>" as c13{
+character = '8'
+}
+c13 o-- verdana12red
+
+
+object "<u>characters[14]: Character </u>" as c14{
+character = '0'
+}
+c14 o-- verdana12red
+
+
+object "<u>characters[15]: Character </u>" as c15{
+character = '0'
+}
+c15 o-- verdana12red
+
+
+map "<u>characters: ArrayList<Character></u>" as docCharacterList {
+characters[0] *-> c0
+characters[1] *-> c1
+characters[2] *-> c2
+characters[3] *-> c3
+characters[4] *-> c4
+characters[5] *-> c5
+characters[6] *-> c6
+characters[7] *-> c7
+characters[8] *-> c8
+characters[9] *-> c9
+characters[10] *-> c10
+characters[11] *-> c11
+characters[12] *-> c12
+characters[13] *-> c13
+characters[14] *-> c14
+characters[15] *-> c15
+}
+
+doc *-- docCharacterList
+
+note as n1
+    I represented the characters ArrayList
+    with its own object diagram because it
+    is considered an object in Java and made
+    the diagram easier to understand. I also
+    didn't put the composition arrows
+    on each of the characters because they are
+    linked to the ArrayList, which does have it
+end note
+
+n1 --> docCharacterList
+
+note as n2
+    For each of the Character objects, I
+    opted to not state the characterProperty
+    slot because the notes say to only add the
+    necessary ones, and there are already
+    aggregation arrows from each Character
+    instance to its respective CharacterProperties
+    instance.
+end note
+n2 --> c0
+
+
+
+object "<u>readDocumentVerify: Document</u>" as 2doc {
+characters = new ArrayList<Character>
+propertiesFactory = new CharacterPropertiesFactory
+}
+
+
+object "<u>: CharacterProperties </u>" as 2arial16black{
+font = "Arial"
+color = "Black"
+size = 16
+}
+
+object "<u>: CharacterProperties </u>" as 2arial14black{
+font = "Arial"
+color = "Black"
+size = 14
+}
+
+object "<u>: CharacterProperties </u>" as 2verdana18blue{
+font = "Verdana"
+color = "Blue"
+size = 18
+}
+object "<u>: CharacterProperties </u>" as 2verdana12red{
+font = "Verdana"
+color = "Red"
+size = 12
+}
+
+
+
+
+map "<u>flyweights: HashMap<CharacterProperties></u>" as 2PropertiesMap {
+"Arial16Black" *-> 2arial16black
+"Arial14Black" *-> 2arial14black
+"Verdana18Blue" *-> 2verdana18blue
+"Verdana12Red" *-> 2verdana12red
+
+}
+
+object "<u>propertiesFactory: CharacterPropertiesFactory</u>" as 2docPropFactory {
+flyweights = new HashMap<CharacterProperties>
+}
+
+2docPropFactory *-- 2PropertiesMap
+2doc *-- 2docPropFactory
+
+
+
+object "<u>characters[0]: Character </u>" as 2c0{
+character = 'H'
+}
+2c0 o-- 2arial16black
+
+object "<u>characters[1]: Character </u>" as 2c1{
+character = 'e'
+}
+2c1 o-- 2arial14black
+
+
+object "<u>characters[2]: Character </u>" as 2c2{
+character = 'l'
+}
+2c2 o-- 2arial14black
+
+
+object "<u>characters[3]: Character </u>" as 2c3{
+character = 'l'
+}
+2c3 o-- 2arial14black
+
+
+object "<u>characters[4]: Character </u>" as 2c4{
+character = 'o'
+}
+2c4 o-- 2arial14black
+
+
+object "<u>characters[5]: Character </u>" as 2c5{
+character = 'W'
+}
+2c5 o-- 2arial16black
+
+
+object "<u>characters[6]: Character </u>" as 2c6{
+character = 'o'
+}
+2c6 o-- 2arial14black
+
+
+object "<u>characters[7]: Character </u>" as 2c7{
+character = 'r'
+}
+2c7 o-- 2arial14black
+
+
+object "<u>characters[8]: Character </u>" as 2c8{
+character = 'l'
+}
+2c8 o-- 2arial14black
+
+
+object "<u>characters[9]: Character </u>" as 2c9{
+character = 'd'
+}
+2c9 o-- 2arial14black
+
+
+object "<u>characters[10]: Character </u>" as 2c10{
+character = 'C'
+}
+2c10 o-- 2verdana18blue
+
+
+object "<u>characters[11]: Character </u>" as 2c11{
+character = 'S'
+}
+2c11 o-- 2verdana18blue
+
+object "<u>characters[12]: Character </u>" as 2c12{
+character = '5'
+}
+2c12 o-- 2verdana12red
+
+object "<u>characters[13]: Character </u>" as 2c13{
+character = '8'
+}
+2c13 o-- 2verdana12red
+
+
+object "<u>characters[14]: Character </u>" as 2c14{
+character = '0'
+}
+2c14 o-- 2verdana12red
+
+
+object "<u>characters[15]: Character </u>" as 2c15{
+character = '0'
+}
+2c15 o-- 2verdana12red
+
+
+map "<u>characters: ArrayList<Character></u>" as 2docCharacterList {
+characters[0] *-> 2c0
+characters[1] *-> 2c1
+characters[2] *-> 2c2
+characters[3] *-> 2c3
+characters[4] *-> 2c4
+characters[5] *-> 2c5
+characters[6] *-> 2c6
+characters[7] *-> 2c7
+characters[8] *-> 2c8
+characters[9] *-> 2c9
+characters[10] *-> 2c10
+characters[11] *-> 2c11
+characters[12] *-> 2c12
+characters[13] *-> 2c13
+characters[14] *-> 2c14
+characters[15] *-> 2c15
+}
+
+2doc *-- 2docCharacterList
+
+
+
+@enduml
